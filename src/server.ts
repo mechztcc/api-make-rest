@@ -2,10 +2,11 @@ import 'reflect-metadata';
 import 'express-async-errors';
 require('dotenv').config()
 
+import routes from '@shared/routes/index'
+
 import express, { NextFunction, Request, Response } from 'express';
 import AppError from './config/errors/AppError';
 
-import routes from './shared/routes/index';
 
 const app = express();
 app.use(routes);

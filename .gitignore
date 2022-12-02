@@ -2,9 +2,5 @@
 .vscode/
 node_modules/
 build/
+tmp/
 temp/
-coverage
-dist
-
-uploads/*
-!uploads/.gitkeep
