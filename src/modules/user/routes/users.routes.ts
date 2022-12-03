@@ -5,6 +5,6 @@ const usersController = new UsersController();
 
 const usersRouter = Router();
 
-usersRouter.get('/create', usersController.create);
+usersRouter.post('/create', usersController.create);
 
 export default usersRouter;

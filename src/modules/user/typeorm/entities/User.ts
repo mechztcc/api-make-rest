@@ -1,4 +1,6 @@
 import { Roles } from '../../../../shared/types/Roles';
+import { UserStatus } from '../../../../shared/types/UserStatus';
+
 import {
   Column,
   CreateDateColumn,
@@ -21,8 +23,8 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  status: boolean;
+  @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVE })
+  status: UserStatus;
 
   @Column({ type: 'enum', enum: Roles, default: Roles.ADMIN })
   roles: Roles;
