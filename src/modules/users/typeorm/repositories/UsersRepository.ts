@@ -8,4 +8,10 @@ export class UsersRepository extends Repository<User> {
 
     return user;
   }
+
+  async findById(id: number | string): Promise<User | undefined> {
+    const user = this.findOne({ where: { id: id } });
+
+    return user;
+  }
 }
