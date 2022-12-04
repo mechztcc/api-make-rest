@@ -1,5 +1,5 @@
 import authRouter from '@modules/auth/routes/auth.routes';
-import usersRouter from '../../modules/user/routes/users.routes';
+import usersRouter from '../../modules/users/routes/users.routes';
 
 import { Router } from 'express';
 

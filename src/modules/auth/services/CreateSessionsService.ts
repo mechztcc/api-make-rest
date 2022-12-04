@@ -1,6 +1,6 @@
 import auth from '@config/auth/auth';
 import AppError from '@config/errors/AppError';
-import { UsersRepository } from '@modules/user/typeorm/repositories/UsersRepository';
+import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { getCustomRepository } from 'typeorm';
