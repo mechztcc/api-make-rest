@@ -1,6 +1,7 @@
 import authConfig from '@config/auth/auth';
 
-import AppError from '@shared/middlewares/isAuth';
+import AppError from '@config/errors/AppError';
+import { Roles } from '@shared/types/Roles';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
@@ -26,10 +27,6 @@ export default function isAuthenticated(
 
   try {
     const decodedToken = verify(token, authConfig.jwt.secret);
-    // sub is a Id of user
-    // Override type Request at src/@types/express/index.d.ts
-    // The main object of this changes, is turn visible the id of user, to all request
-    // That this method intercep
     const { sub } = decodedToken as ITokenPayload;
     request.user = { id: sub };
 
