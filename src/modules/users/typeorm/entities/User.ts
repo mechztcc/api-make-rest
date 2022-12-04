@@ -5,9 +5,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Restaurant } from '../../../restaurants/typeorm/entities/Restaurant';
 
 @Entity('users')
 export class User {
@@ -28,6 +30,9 @@ export class User {
 
   @Column({ type: 'enum', enum: Roles, default: Roles.ADMIN })
   roles: Roles;
+
+  @OneToMany(() => Restaurant, (restaurant) => restaurant.user)
+  restaurants: Restaurant[];
 
   @CreateDateColumn()
   created_at: Date;
