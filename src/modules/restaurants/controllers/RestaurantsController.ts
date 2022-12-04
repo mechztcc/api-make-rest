@@ -17,8 +17,6 @@ export class RestaurantController {
       throw new AppError('User not found');
     }
 
-    console.log(userExist);
-
     const restaurant = await createRestaurantService.execute({
       name,
       details,

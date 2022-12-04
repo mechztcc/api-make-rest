@@ -1,5 +1,5 @@
-import { Roles } from '../../../../shared/types/Roles';
-import { UserStatus } from '../../../../shared/types/UserStatus';
+import { Roles } from '@shared/types/Roles';
+import { UserStatus } from '@shared/types/UserStatus';
 
 import {
   Column,
@@ -22,7 +22,7 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column({ type: 'enum', enum: UserStatus, default: UserStatus.ACTIVE })
