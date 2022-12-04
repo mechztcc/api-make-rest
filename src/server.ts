@@ -2,13 +2,14 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import '@shared/typeorm/';
 
-require('dotenv').config();
-
+import { config } from 'dotenv';
 import routes from '@shared/routes/index';
 import express, { NextFunction, Request, Response } from 'express';
 import { errors } from 'celebrate';
 
 import AppError from './config/errors/AppError';
+
+config();
 
 const app = express();
 app.use(express.json());
