@@ -1,5 +1,5 @@
 import AppError from '@config/errors/AppError';
-import { UsersRepository } from '@modules/user/repositories/UsersRepository';
+import { UsersRepository } from '@modules/user/typeorm/repositories/UsersRepository';
 import { User } from '@modules/user/typeorm/entities/User';
 import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
