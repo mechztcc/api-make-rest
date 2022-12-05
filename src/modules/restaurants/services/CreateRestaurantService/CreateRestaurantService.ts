@@ -1,6 +1,6 @@
 import { User } from '@modules/users/typeorm/entities/User';
 import { getRepository } from 'typeorm';
-import { Restaurant } from '../typeorm/entities/Restaurant';
+import { Restaurant } from '../../typeorm/entities/Restaurant';
 
 interface IRequest {
   name: string;

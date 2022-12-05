@@ -19,4 +19,15 @@ restaurantsRouter.post(
   restaurantsController.create
 );
 
+restaurantsRouter.get(
+  '/:id',
+  isAuth,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  restaurantsController.findById
+);
+
 export default restaurantsRouter;

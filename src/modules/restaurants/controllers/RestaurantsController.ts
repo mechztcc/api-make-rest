@@ -1,8 +1,10 @@
 import AppError from '@config/errors/AppError';
 import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { Request, Response } from 'express';
+import { STATUS_CODES } from 'http';
 import { getCustomRepository } from 'typeorm';
-import { CreateRestaurantService } from '../services/CreateRestaurantService';
+import { CreateRestaurantService } from '../services/CreateRestaurantService/CreateRestaurantService';
+import { FindRestaurantByIdService } from '../services/FindRestaurantByIdService/FindRestarauntByIdService';
 
 export class RestaurantController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -21,6 +23,18 @@ export class RestaurantController {
       name,
       details,
       user: userExist,
+    });
+
+    return res.json(restaurant);
+  }
+
+  async findById(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const findRestaurantByIdService = new FindRestaurantByIdService();
+
+    const restaurant = await findRestaurantByIdService.execute({
+      id: Number(id),
     });
 
     return res.json(restaurant);
