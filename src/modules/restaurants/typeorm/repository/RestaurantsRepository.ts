@@ -17,4 +17,13 @@ export class RestaurantsRepository extends Repository<Restaurant> {
 
     return restaurants;
   }
+
+  findWithUser(id: number): Promise<Restaurant | undefined> {
+    const restaurant = this.findOne({
+      where: { id: id },
+      relations: ['user'],
+    });
+
+    return restaurant;
+  }
 }

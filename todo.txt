@@ -1,3 +1,10 @@
-Users
+-- Users
 [X] Create
-[ ] Update
+[X] Update
+
+[X] Auth
+
+-- Restaurants
+[X] Create
+[X] Find by id
+[X] Find all by user

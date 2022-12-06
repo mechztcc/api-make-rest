@@ -31,7 +31,7 @@ restaurantsRouter.get(
 );
 
 restaurantsRouter.get(
-  '/user/:id',
+  '/users/:id',
   isAuth,
   celebrate({
     [Segments.PARAMS]: {
@@ -40,4 +40,16 @@ restaurantsRouter.get(
   }),
   restaurantsController.findAllByUser
 );
+
+restaurantsRouter.put(
+  '/:id',
+  isAuth,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  restaurantsController.openRestaurant
+);
+
 export default restaurantsRouter;

@@ -1,11 +1,11 @@
 import AppError from '@config/errors/AppError';
 import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { Request, Response } from 'express';
-import { STATUS_CODES } from 'http';
 import { getCustomRepository } from 'typeorm';
 import { CreateRestaurantService } from '../services/CreateRestaurantService/CreateRestaurantService';
 import { FindAllRestaurantsByUserService } from '../services/FindAllByUserService/FindAllByUserService';
 import { FindRestaurantByIdService } from '../services/FindRestaurantByIdService/FindRestarauntByIdService';
+import { OpenRestaurantService } from '../services/OpenRestaurantService/OpenRestaurantService';
 
 export class RestaurantController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -48,5 +48,19 @@ export class RestaurantController {
     const restaurants = await findAllByUserService.execute({ id: Number(id) });
 
     return res.json(restaurants);
+  }
+
+  async openRestaurant(req: Request, res: Response): Promise<Response> {
+    const userId = req.user.id;
+    const { id } = req.params;
+
+    const openRestaurantService = new OpenRestaurantService();
+
+    const restaurant = await openRestaurantService.execute({
+      id: Number(id),
+      userId: Number(userId),
+    });
+
+    return res.json(restaurant);
   }
 }
