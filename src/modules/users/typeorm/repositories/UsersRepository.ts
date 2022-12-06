@@ -14,4 +14,12 @@ export class UsersRepository extends Repository<User> {
 
     return user;
   }
+
+  async updateName(id: number, name: string): Promise<void> {
+    this.createQueryBuilder('users')
+      .update(User)
+      .set({ name: name })
+      .where('id = :id', { id: id })
+      .execute();
+  }
 }

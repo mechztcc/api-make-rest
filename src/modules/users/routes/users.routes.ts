@@ -20,4 +20,15 @@ usersRouter.post(
   usersController.create
 );
 
+usersRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      id: Joi.number().required(),
+    },
+  }),
+  usersController.update
+);
+
 export default usersRouter;
