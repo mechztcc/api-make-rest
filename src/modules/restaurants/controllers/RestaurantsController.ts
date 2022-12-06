@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { STATUS_CODES } from 'http';
 import { getCustomRepository } from 'typeorm';
 import { CreateRestaurantService } from '../services/CreateRestaurantService/CreateRestaurantService';
+import { FindAllRestaurantsByUserService } from '../services/FindAllByUserService/FindAllByUserService';
 import { FindRestaurantByIdService } from '../services/FindRestaurantByIdService/FindRestarauntByIdService';
 
 export class RestaurantController {
@@ -38,5 +39,14 @@ export class RestaurantController {
     });
 
     return res.json(restaurant);
+  }
+
+  async findAllByUser(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const findAllByUserService = new FindAllRestaurantsByUserService();
+    const restaurants = await findAllByUserService.execute({ id: Number(id) });
+
+    return res.json(restaurants);
   }
 }

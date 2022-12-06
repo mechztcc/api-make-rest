@@ -9,4 +9,12 @@ export class RestaurantsRepository extends Repository<Restaurant> {
       .getOne();
     return restaurant;
   }
+
+  findAllByUser(id: number): Promise<Restaurant[]> {
+    const restaurants = this.createQueryBuilder('restaurants')
+      .where('restaurants.userId = :id', { id: id })
+      .getMany();
+
+    return restaurants;
+  }
 }
