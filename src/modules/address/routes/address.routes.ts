@@ -22,4 +22,14 @@ addressRouter.post(
   addressController.create
 );
 
+addressRouter.get(
+  '/restaurants/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  addressController.findByRestaurant
+);
+
 export default addressRouter;
