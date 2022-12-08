@@ -33,6 +33,13 @@ export class CreateAddressService {
       throw new AppError('Restaurant not found.');
     }
 
+    const addressExists = await addressRepository.findOne({
+      where: { restaurant: restaurant },
+    });
+    if (addressExists) {
+      throw new AppError('restaurant already has registered address');
+    }
+
     const address = addressRepository.create({
       state,
       city,
