@@ -28,6 +28,9 @@ export class Address {
   number: string;
 
   @Column()
+  complement: string;
+
+  @Column()
   zip: string;
 
   @OneToOne(() => Restaurant)
