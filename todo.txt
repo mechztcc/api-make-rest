@@ -9,3 +9,7 @@
 [X] Find by id
 [X] Find all by user
 [X] Open
+
+-- Address
+[X] Create
+[X] Find by restaurant
