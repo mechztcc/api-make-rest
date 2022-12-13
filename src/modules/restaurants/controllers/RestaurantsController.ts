@@ -42,10 +42,12 @@ export class RestaurantController {
   }
 
   async findAllByUser(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
+    const userId = req.user.id;
 
     const findAllByUserService = new FindAllRestaurantsByUserService();
-    const restaurants = await findAllByUserService.execute({ id: Number(id) });
+    const restaurants = await findAllByUserService.execute({
+      id: Number(userId),
+    });
 
     return res.json(restaurants);
   }

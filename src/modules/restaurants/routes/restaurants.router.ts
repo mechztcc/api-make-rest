@@ -31,19 +31,13 @@ restaurantsRouter.get(
 );
 
 restaurantsRouter.get(
-  '/users/:id',
+  '/',
   isAuth,
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().required(),
-    },
-  }),
   restaurantsController.findAllByUser
 );
 
 restaurantsRouter.put(
   '/:id',
-  isAuth,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().required(),
