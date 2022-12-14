@@ -22,3 +22,20 @@
 -- Category
 [X] Create
 [X] Find by id
+
+-- Employee
+[ ] Create
+[ ] Find by id
+[ ] Find all
+
+-- Station
+[ ] Create
+[ ] Find by id
+[ ] Change status 'OPEN', 'BUSY', 'IDLE'
+
+-- Invoice
+[ ] Create
+[ ] Find by id
+[ ] Find All by restaurant
+[ ] Find All by date
+[ ] Close
