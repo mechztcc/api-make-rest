@@ -15,6 +15,10 @@
 [X] Find by restaurant
 
 -- Product
-[ ] Create
-[ ] Find by id
+[X] Create
+[X] Find by id
 [ ] Find all by restaurant
+
+-- Category
+[X] Create
+[X] Find by id
