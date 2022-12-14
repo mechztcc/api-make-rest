@@ -14,4 +14,7 @@
 [X] Create
 [X] Find by restaurant
 
--- 
+-- Product
+[ ] Create
+[ ] Find by id
+[ ] Find all by restaurant
