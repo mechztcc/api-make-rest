@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Category } from '@modules/category/typeorm/entities/Category';
+import { Employee } from '@modules/employees/typeorm/entities/Employee';
 
 @Entity('restaurants')
 export class Restaurant {
@@ -29,6 +30,9 @@ export class Restaurant {
 
   @OneToMany(() => Category, (category) => category.restaurant)
   categories: Category[];
+
+  @OneToMany(() => Employee, (employee) => employee.restaurant)
+  employees: Employee[];
 
   @CreateDateColumn()
   created_at: Date;

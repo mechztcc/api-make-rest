@@ -30,12 +30,14 @@
 
 -- Station
 [ ] Create
-[ ] Find by id
+[ ] Find by client document
 [ ] Change status 'OPEN', 'BUSY', 'IDLE'
+[ ] Find all by restaurant
 
 -- Invoice
 [ ] Create
 [ ] Find by id
+[ ] Find by client document
 [ ] Find All by restaurant
 [ ] Find All by date
 [ ] Close
