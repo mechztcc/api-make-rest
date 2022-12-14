@@ -5,6 +5,7 @@ import addressRouter from '@modules/address/routes/address.routes';
 
 import { Router } from 'express';
 import categoriesRouter from '@modules/category/routes/categories.router';
+import productsRouter from '@modules/products/routes/products.routes';
 
 const routes = Router();
 
@@ -13,5 +14,6 @@ routes.use('/auth', authRouter);
 routes.use('/restaurants', restaurantsRouter);
 routes.use('/addresses', addressRouter);
 routes.use('/categories', categoriesRouter);
+routes.use('/products', productsRouter);
 
 export default routes;
