@@ -21,4 +21,15 @@ productsRouter.post(
   productsController.create
 );
 
+productsRouter.get(
+  '/:id',
+  isAuth,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  productsController.findById
+);
+
 export default productsRouter;
