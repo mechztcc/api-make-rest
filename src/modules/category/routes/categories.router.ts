@@ -19,4 +19,14 @@ categoriesRouter.post(
   categoriesController.create
 );
 
+categoriesRouter.get(
+  '/:id',
+  isAuth,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  categoriesController.findById
+);
 export default categoriesRouter;
