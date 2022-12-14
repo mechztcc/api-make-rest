@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Category } from '@modules/category/typeorm/entities/Category';
 
 @Entity('restaurants')
 export class Restaurant {
@@ -24,6 +26,9 @@ export class Restaurant {
 
   @ManyToOne(() => User, (user) => user.restaurants)
   user: User;
+
+  @OneToMany(() => Category, (category) => category.restaurant)
+  categories: Category[];
 
   @CreateDateColumn()
   created_at: Date;
