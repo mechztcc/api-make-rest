@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    entrypoint: npm run dev
+    environment:
+      - API_PORT=3335
+    volumes:
+      - .:/home/app
+    network_mode: 'host'
