@@ -7,5 +7,6 @@ module.exports = {
     '^@config/(.*)$': '<rootDir>/src/config/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1',
   },
-  clearMocks: true
+  clearMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };

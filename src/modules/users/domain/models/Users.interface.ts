@@ -17,7 +17,7 @@ export interface IUser {
 
   restaurants: Restaurant[];
 
-  created_at: Date;
+  created_at?: Date;
 
-  updated_at: Date;
+  updated_at?: Date;
 }

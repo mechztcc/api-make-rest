@@ -1,6 +1,21 @@
+import { faker } from '@faker-js/faker';
+import { FakeUsersRepository } from '@modules/users/domain/repositories/fakes/FakeUsersRepository';
+import { Roles } from '@shared/types/Roles';
+import { CreateUserService } from './CreateUserService';
 
 describe('Create user', () => {
-  test('It should be return status 400 when try to create a new user with exists email', () => {
-    expect(1 + 1).toBe(2);
+  it('It should be create a new user', async () => {
+    const fakerUsersRepository = new FakeUsersRepository();
+
+    const createUser = new CreateUserService(fakerUsersRepository);
+
+    const user = await createUser.execute({
+      name: 'User 01',
+      email: faker.internet.email(),
+      password: '123456',
+      role: Roles.ADMIN,
+    });
+
+    expect(user).toHaveProperty('id');
   });
 });

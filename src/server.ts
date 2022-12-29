@@ -1,7 +1,7 @@
+import 'reflect-metadata';
 import '@shared/container';
 import '@shared/typeorm/';
 import 'express-async-errors';
-import 'reflect-metadata';
 
 import routes from '@shared/routes/index';
 import { errors } from 'celebrate';

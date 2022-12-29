@@ -1,5 +1,5 @@
-import { ICreateUser } from '../models/CreateUser.interface';
-import { IUser } from '../models/Users.interface';
+import { ICreateUser } from '../../models/CreateUser.interface';
+import { IUser } from '../../models/Users.interface';
 
 export interface IUsersRepository {
   findByEmail(email: string): Promise<IUser | undefined>;
@@ -10,5 +10,5 @@ export interface IUsersRepository {
 
   create({ name, email, password, roles, status }: ICreateUser): IUser;
 
-  save(user: IUser): Promise<ICreateUser>;
+  save(user: IUser): Promise<IUser>;
 }

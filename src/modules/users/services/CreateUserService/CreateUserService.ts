@@ -1,5 +1,5 @@
 import AppError from '@config/errors/AppError';
-import { IUsersRepository } from '@modules/users/domain/repositories/UsersRepository.interface';
+import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
 import { User } from '@modules/users/typeorm/entities/User';
 import { Roles } from '@shared/types/Roles';
 import { UserStatus } from '@shared/types/UserStatus';
