@@ -25,8 +25,8 @@ export class UsersController {
 
     const updateUserService = container.resolve(UpdateUserService);
 
-    await updateUserService.execute({ id, name });
+    const user = await updateUserService.execute({ id, name });
 
-    return res.status(202).send();
+    return res.status(202).send(user);
   }
 }

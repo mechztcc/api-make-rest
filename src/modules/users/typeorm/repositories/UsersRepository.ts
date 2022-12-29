@@ -40,12 +40,15 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async updateName(id: number, name: string): Promise<void> {
-    this.repository
+  async updateName(id: number, name: string): Promise<User> {
+    const user = await this.repository
       .createQueryBuilder('users')
       .update(User)
       .set({ name: name })
       .where('id = :id', { id: id })
+      .returning('*')
       .execute();
+
+    return user.raw[0] as User;
   }
 }

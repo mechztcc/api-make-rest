@@ -6,7 +6,7 @@ export interface IUsersRepository {
 
   findById(id: number | string): Promise<IUser | undefined>;
 
-  updateName(id: number, name: string): Promise<void>;
+  updateName(id: number, name: string): Promise<IUser | undefined>;
 
   create({ name, email, password, roles, status }: ICreateUser): IUser;
 

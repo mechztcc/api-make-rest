@@ -46,11 +46,30 @@ export class FakeUsersRepository implements IUsersRepository {
     return user;
   }
 
-  findById(id: string | number): Promise<IUser | undefined> {
-    throw new Error('Method not implemented.');
+  async findById(id: string | number): Promise<IUser | undefined> {
+    const user = this.users.find((user) => {
+      return user.id === id;
+    });
+
+    if (!user) {
+      return;
+    }
+    return user;
   }
-  updateName(id: number, name: string): Promise<void> {
-    throw new Error('Method not implemented.');
+
+
+
+  async updateName(id: number, name: string): Promise<IUser | undefined> {
+    const user = this.users.find((user) => {
+      return user.id === id;
+    });
+
+    if (!user) {
+      return;
+    }
+
+    user.name = name;
+    return user;
   }
   create({ name, email, password, roles, status }: ICreateUser): IUser {
     const user: IUser = {
