@@ -1,12 +1,13 @@
-import 'reflect-metadata';
-import 'express-async-errors';
+import '@shared/container';
 import '@shared/typeorm/';
+import 'express-async-errors';
+import 'reflect-metadata';
 
-import { config } from 'dotenv';
 import routes from '@shared/routes/index';
-import express, { NextFunction, Request, Response } from 'express';
-import { errors, isCelebrateError } from 'celebrate';
+import { errors } from 'celebrate';
 import cors from 'cors';
+import { config } from 'dotenv';
+import express, { NextFunction, Request, Response } from 'express';
 
 import AppError from './config/errors/AppError';
 

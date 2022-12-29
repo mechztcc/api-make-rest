@@ -8,7 +8,7 @@ const usersController = new UsersController();
 const usersRouter = Router();
 
 usersRouter.post(
-  '/create',
+  '/',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
