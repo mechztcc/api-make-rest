@@ -1,14 +1,19 @@
 import AppError from '@config/errors/AppError';
 import { faker } from '@faker-js/faker';
 import { FakeUsersRepository } from '@modules/users/domain/repositories/fakes/FakeUsersRepository';
+import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
 import { HttpStatus } from '@shared/types/HttpStatus';
 import { Roles } from '@shared/types/Roles';
 import { CreateUserService } from './CreateUserService';
 
 describe('Create user', () => {
-  it('It should be create a new user', async () => {
-    const fakerUsersRepository = new FakeUsersRepository();
+  let fakerUsersRepository: IUsersRepository;
 
+  beforeEach(() => {
+    fakerUsersRepository = new FakeUsersRepository();
+  });
+
+  it('It should be create a new user', async () => {
     const createUser = new CreateUserService(fakerUsersRepository);
 
     const user = await createUser.execute({
@@ -23,8 +28,6 @@ describe('Create user', () => {
   });
 
   it('It should be throw new AppError when try to create user with already in use email', async () => {
-    const fakerUsersRepository = new FakeUsersRepository();
-
     const createUser = new CreateUserService(fakerUsersRepository);
 
     const user = await createUser.execute({
@@ -49,8 +52,6 @@ describe('Create user', () => {
   });
 
   it('It should return status 422 when password has lengh minor that 8 digits', async () => {
-    const fakerUsersRepository = new FakeUsersRepository();
-
     const createUser = new CreateUserService(fakerUsersRepository);
 
     createUser
@@ -66,7 +67,10 @@ describe('Create user', () => {
           'message',
           'Password lenght must be at least 8 characters.'
         );
-        expect(error).toHaveProperty('statusCode', HttpStatus.UNPROCESSABLE_ENTITY);
+        expect(error).toHaveProperty(
+          'statusCode',
+          HttpStatus.UNPROCESSABLE_ENTITY
+        );
       });
   });
 });
