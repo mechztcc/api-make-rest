@@ -21,21 +21,6 @@ export class FakeUsersRepository implements IUsersRepository {
       restaurants: [],
     };
     this.users.push(user);
-
-    for (let index = 0; index < 5; index++) {
-      const user: IUser = {
-        id: index + 1,
-        email: faker.internet.email(),
-        name: faker.name.fullName(),
-        password: faker.internet.password(),
-        roles: Roles.ADMIN,
-        status: UserStatus.ACTIVE,
-        created_at: faker.date.birthdate(),
-        updated_at: faker.date.birthdate(),
-        restaurants: [],
-      };
-      this.users.push(user);
-    }
   }
 
   async findByEmail(email: string): Promise<IUser | undefined> {

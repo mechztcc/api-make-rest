@@ -49,6 +49,7 @@ export class UsersRepository implements IUsersRepository {
       .returning('*')
       .execute();
 
+
     return user.raw[0] as User;
   }
 }

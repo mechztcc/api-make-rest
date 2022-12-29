@@ -23,6 +23,7 @@ export class UpdateUserService {
     }
 
     const user = await this.usersRepository.updateName(id, name);
+    user?.password = undefined
     return user;
   }
 }

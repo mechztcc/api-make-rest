@@ -42,6 +42,8 @@ export class CreateUserService {
     });
     await this.usersRepository.save(user);
 
+    user.password = null
+
     return user;
   }
 }
