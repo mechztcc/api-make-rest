@@ -15,7 +15,7 @@ describe('Create user', () => {
     const user = await createUser.execute({
       name: 'User 01',
       email: faker.internet.email(),
-      password: '123456',
+      password: '12345678',
       role: Roles.ADMIN,
     });
 
@@ -31,21 +31,43 @@ describe('Create user', () => {
     const user = await createUser.execute({
       name: 'User 01',
       email: faker.internet.email(),
-      password: '123456',
+      password: '12345678',
       role: Roles.ADMIN,
     });
 
-    await createUser
+    createUser
       .execute({
         name: 'User 01',
         email: user.email,
-        password: '123456',
+        password: '12345678',
         role: Roles.ADMIN,
       })
       .catch((error) => {
         expect(error).toBeInstanceOf(AppError);
         expect(error).toHaveProperty('message', 'Email address already used.');
         expect(error).toHaveProperty('statusCode', 400);
+      });
+  });
+
+  it('It should return status 400 when password has lengh minor that 8 digits', async () => {
+    const fakerUsersRepository = new FakeUsersRepository();
+
+    const createUser = new CreateUserService(fakerUsersRepository);
+
+    createUser
+      .execute({
+        name: 'User 01',
+        email: faker.internet.email(),
+        password: '123456',
+        role: Roles.ADMIN,
+      })
+      .catch((error) => {
+        expect(error).toBeInstanceOf(AppError);
+        expect(error).toHaveProperty(
+          'message',
+          'Password lenght must be at least 8 characters.'
+        );
+        expect(error).toHaveProperty('statusCode', 422);
       });
   });
 });

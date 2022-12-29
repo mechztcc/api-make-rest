@@ -26,6 +26,10 @@ export class CreateUserService {
       throw new AppError('Email address already used.');
     }
 
+    if (password.length < 8) {
+      throw new AppError('Password lenght must be at least 8 characters.', 422);
+    }
+
     const hashedPassword = await hash(password, 8);
 
     const user = this.usersRepository.create({
