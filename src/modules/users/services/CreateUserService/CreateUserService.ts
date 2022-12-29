@@ -1,6 +1,7 @@
 import AppError from '@config/errors/AppError';
 import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
 import { User } from '@modules/users/typeorm/entities/User';
+import { HttpStatus } from '@shared/types/HttpStatus';
 import { Roles } from '@shared/types/Roles';
 import { UserStatus } from '@shared/types/UserStatus';
 import { hash } from 'bcryptjs';
@@ -23,11 +24,11 @@ export class CreateUserService {
     const emailExists = await this.usersRepository.findByEmail(email);
 
     if (emailExists) {
-      throw new AppError('Email address already used.');
+      throw new AppError('Email address already used.', HttpStatus.CONFLICT);
     }
 
     if (password.length < 8) {
-      throw new AppError('Password lenght must be at least 8 characters.', 422);
+      throw new AppError('Password lenght must be at least 8 characters.', HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     const hashedPassword = await hash(password, 8);

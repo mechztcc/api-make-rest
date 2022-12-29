@@ -1,9 +1,8 @@
 import AppError from '@config/errors/AppError';
 import { faker } from '@faker-js/faker';
 import { FakeUsersRepository } from '@modules/users/domain/repositories/fakes/FakeUsersRepository';
-import { User } from '@modules/users/typeorm/entities/User';
+import { HttpStatus } from '@shared/types/HttpStatus';
 import { Roles } from '@shared/types/Roles';
-import exp from 'constants';
 import { CreateUserService } from './CreateUserService';
 
 describe('Create user', () => {
@@ -45,11 +44,11 @@ describe('Create user', () => {
       .catch((error) => {
         expect(error).toBeInstanceOf(AppError);
         expect(error).toHaveProperty('message', 'Email address already used.');
-        expect(error).toHaveProperty('statusCode', 400);
+        expect(error).toHaveProperty('statusCode', HttpStatus.CONFLICT);
       });
   });
 
-  it('It should return status 400 when password has lengh minor that 8 digits', async () => {
+  it('It should return status 422 when password has lengh minor that 8 digits', async () => {
     const fakerUsersRepository = new FakeUsersRepository();
 
     const createUser = new CreateUserService(fakerUsersRepository);
@@ -67,7 +66,7 @@ describe('Create user', () => {
           'message',
           'Password lenght must be at least 8 characters.'
         );
-        expect(error).toHaveProperty('statusCode', 422);
+        expect(error).toHaveProperty('statusCode', HttpStatus.UNPROCESSABLE_ENTITY);
       });
   });
 });
