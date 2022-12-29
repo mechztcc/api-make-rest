@@ -23,7 +23,7 @@ export class UsersController {
   async update(req: Request, res: Response): Promise<Response> {
     const { id, name } = req.body;
 
-    const updateUserService = new UpdateUserService();
+    const updateUserService = container.resolve(UpdateUserService);
 
     await updateUserService.execute({ id, name });
 
