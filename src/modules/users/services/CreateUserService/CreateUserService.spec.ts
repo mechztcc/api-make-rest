@@ -2,8 +2,10 @@ import AppError from '@config/errors/AppError';
 import { faker } from '@faker-js/faker';
 import { FakeUsersRepository } from '@modules/users/domain/repositories/fakes/FakeUsersRepository';
 import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
+import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { HttpStatus } from '@shared/types/HttpStatus';
 import { Roles } from '@shared/types/Roles';
+import { getCustomRepository } from 'typeorm';
 import { CreateUserService } from './CreateUserService';
 
 describe('Create user', () => {

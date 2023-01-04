@@ -42,7 +42,7 @@ export class CreateUserService {
     });
     await this.usersRepository.save(user);
 
-    user.password = null
+    user.password = ''
 
     return user;
   }
