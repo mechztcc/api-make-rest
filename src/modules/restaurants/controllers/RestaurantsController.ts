@@ -8,7 +8,8 @@ import { OpenRestaurantService } from '../services/OpenRestaurantService/OpenRes
 export class RestaurantController {
   async create(req: Request, res: Response): Promise<Response> {
     const { name, details } = req.body;
-    const userId = 1;
+    
+    const userId = req.user.id;
 
     const createRestaurantService = container.resolve(CreateRestaurantService);
 

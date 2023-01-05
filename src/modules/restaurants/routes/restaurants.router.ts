@@ -9,6 +9,7 @@ const restaurantsRouter = Router();
 
 restaurantsRouter.post(
   '/',
+  isAuth,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -29,11 +30,7 @@ restaurantsRouter.get(
   restaurantsController.findById
 );
 
-restaurantsRouter.get(
-  '/',
-  isAuth,
-  restaurantsController.findAllByUser
-);
+restaurantsRouter.get('/', isAuth, restaurantsController.findAllByUser);
 
 restaurantsRouter.put(
   '/:id',
