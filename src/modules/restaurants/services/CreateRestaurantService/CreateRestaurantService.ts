@@ -1,7 +1,6 @@
 import AppError from '@config/errors/AppError';
 import { IRestaurantsRepository } from '@modules/restaurants/domain/repositories/interfaces/RestaurantsRepository.interface';
 import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
-import { User } from '@modules/users/typeorm/entities/User';
 import { inject, injectable } from 'tsyringe';
 import { Restaurant } from '../../typeorm/entities/Restaurant';
 
