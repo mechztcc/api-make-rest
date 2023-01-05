@@ -1,7 +1,5 @@
-import AppError from '@config/errors/AppError';
-import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { Request, Response } from 'express';
-import { getCustomRepository } from 'typeorm';
+import { container } from 'tsyringe';
 import { CreateRestaurantService } from '../services/CreateRestaurantService/CreateRestaurantService';
 import { FindAllRestaurantsByUserService } from '../services/FindAllByUserService/FindAllByUserService';
 import { FindRestaurantByIdService } from '../services/FindRestaurantByIdService/FindRestarauntByIdService';
@@ -10,20 +8,14 @@ import { OpenRestaurantService } from '../services/OpenRestaurantService/OpenRes
 export class RestaurantController {
   async create(req: Request, res: Response): Promise<Response> {
     const { name, details } = req.body;
-    const userId = req.user.id;
+    const userId = 1;
 
-    const createRestaurantService = new CreateRestaurantService();
-    const usersRepository = getCustomRepository(UsersRepository);
-
-    const userExist = await usersRepository.findOne({ where: { id: userId } });
-    if (!userExist) {
-      throw new AppError('User not found');
-    }
+    const createRestaurantService = container.resolve(CreateRestaurantService);
 
     const restaurant = await createRestaurantService.execute({
       name,
       details,
-      user: userExist,
+      userId,
     });
 
     return res.json(restaurant);
@@ -32,7 +24,9 @@ export class RestaurantController {
   async findById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    const findRestaurantByIdService = new FindRestaurantByIdService();
+    const findRestaurantByIdService = container.resolve(
+      FindRestaurantByIdService
+    );
 
     const restaurant = await findRestaurantByIdService.execute({
       id: Number(id),
@@ -44,7 +38,9 @@ export class RestaurantController {
   async findAllByUser(req: Request, res: Response): Promise<Response> {
     const userId = req.user.id;
 
-    const findAllByUserService = new FindAllRestaurantsByUserService();
+    const findAllByUserService = container.resolve(
+      FindAllRestaurantsByUserService
+    );
     const restaurants = await findAllByUserService.execute({
       id: Number(userId),
     });
@@ -56,7 +52,7 @@ export class RestaurantController {
     const userId = req.user.id;
     const { id } = req.params;
 
-    const openRestaurantService = new OpenRestaurantService();
+    const openRestaurantService = container.resolve(OpenRestaurantService);
 
     const restaurant = await openRestaurantService.execute({
       id: Number(id),

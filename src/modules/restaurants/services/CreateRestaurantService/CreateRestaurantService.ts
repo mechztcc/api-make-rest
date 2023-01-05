@@ -1,24 +1,38 @@
+import AppError from '@config/errors/AppError';
+import { IRestaurantsRepository } from '@modules/restaurants/domain/repositories/interfaces/RestaurantsRepository.interface';
+import { IUsersRepository } from '@modules/users/domain/repositories/interfaces/UsersRepository.interface';
 import { User } from '@modules/users/typeorm/entities/User';
-import { getRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 import { Restaurant } from '../../typeorm/entities/Restaurant';
 
 interface IRequest {
   name: string;
   details: string;
-  user: User;
+  userId: string | number;
 }
 
+@injectable()
 export class CreateRestaurantService {
-  async execute({ name, details, user }: IRequest): Promise<Restaurant> {
-    const restaurantsRepository = getRepository(Restaurant);
+  constructor(
+    @inject('RestaurantsRepository')
+    private restaurantsRepository: IRestaurantsRepository,
+    @inject('UsersRepository') private usersRepository: IUsersRepository
+  ) {}
 
-    const restaurant = restaurantsRepository.create({
+  async execute({ name, details, userId }: IRequest): Promise<Restaurant> {
+    const userExist = await this.usersRepository.findById(userId);
+    if (!userExist) {
+      throw new AppError('User not found');
+    }
+
+    const restaurant = await this.restaurantsRepository.create({
       name,
       details,
-      user,
+      user: userExist,
       opened: false,
     });
-    await restaurantsRepository.save(restaurant);
+
+    await this.restaurantsRepository.save(restaurant);
     return restaurant;
   }
 }

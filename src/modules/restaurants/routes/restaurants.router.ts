@@ -8,8 +8,7 @@ const restaurantsController = new RestaurantController();
 const restaurantsRouter = Router();
 
 restaurantsRouter.post(
-  '/create',
-  isAuth,
+  '/',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
