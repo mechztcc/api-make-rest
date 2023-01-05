@@ -1,24 +1,25 @@
 import AppError from '@config/errors/AppError';
+import { IRestaurantsRepository } from '@modules/restaurants/domain/repositories/interfaces/RestaurantsRepository.interface';
 import { Restaurant } from '@modules/restaurants/typeorm/entities/Restaurant';
-import { RestaurantsRepository } from '@modules/restaurants/typeorm/repository/RestaurantsRepository';
-import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
-import { getCustomRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   id: number;
   userId: number;
 }
-
+@injectable()
 export class OpenRestaurantService {
-  async execute({ id, userId }: IRequest): Promise<Restaurant> {
-    const restaurantsRepository = getCustomRepository(RestaurantsRepository);
-    const usersRepository = getCustomRepository(UsersRepository);
+  constructor(
+    @inject('RestaurantsRepository')
+    private restaurantsRepository: IRestaurantsRepository
+  ) {}
 
-    const restaurant = await restaurantsRepository.findWithUser(id);
+  async execute({ id, userId }: IRequest): Promise<Restaurant> {
+    const restaurant = await this.restaurantsRepository.findWithUser(id);
     if (!restaurant) {
       throw new AppError('Restaurant not found');
     }
-    
+
     if (restaurant.user.id !== userId) {
       throw new AppError(
         'The user provided its not the owner of this restaurant'
@@ -26,7 +27,7 @@ export class OpenRestaurantService {
     }
 
     restaurant.opened = true;
-    await restaurantsRepository.save(restaurant);
+    await this.restaurantsRepository.save(restaurant);
 
     return restaurant;
   }
